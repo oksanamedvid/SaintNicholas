@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaintNicholas.Mediator;
+using SaintNicholas.Orders;
 
 namespace SaintNicholas
 {
@@ -6,7 +7,11 @@ namespace SaintNicholas
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var mediator = new PostSaintNicholasMediator();
+
+            var orderFacade = new OrderFacade();
+            var orders = orderFacade.GetOrdersForSaintNicholas();
+            orders.ForEach(order => mediator.PostOffice.SendPostProduct(order));
         }
     }
 }
